@@ -116,6 +116,7 @@ body {
 .happy-text {
     font-family: 'Brush Script MT', 'Brush Script', 'Lucida Handwriting', cursive;
     font-size: 52px; /* Slightly larger */
+    font-style: italic;
     font-weight: normal;
     color: #1d4b5c; /* Darker blue to match */
     margin: 0;
@@ -154,7 +155,7 @@ body {
 .circle-border {
     width: 280px;
     height: 280px;
-    border: 24px solid #27bfc1; 
+    border: 24px solid #27bfc1;
     border-radius: 50%;
     position: absolute;
     top: 0;
@@ -181,10 +182,10 @@ body {
     object-fit: cover;
     object-position: top;
     /* Pop-out mask: Circle starts at y=95px (top of container) */
-    -webkit-mask-image: 
+    -webkit-mask-image:
         radial-gradient(circle at 50% 235px, black 140px, transparent 141px),
         linear-gradient(to bottom, black 235px, transparent 235px);
-    mask-image: 
+    mask-image:
         radial-gradient(circle at 50% 235px, black 140px, transparent 141px),
         linear-gradient(to bottom, black 235px, transparent 235px);
     -webkit-mask-composite: source-over;
@@ -262,45 +263,45 @@ body {
     .birthday-container {
         height: 500px;
     }
-    
+
     .happy-text {
         font-size: 36px;
     }
-    
+
     .birthday-text {
         font-size: 42px;
         letter-spacing: 4px;
     }
-    
+
     .profile-container {
         width: 180px;
         height: 180px;
     }
-    
+
     .circle-border {
         width: 180px;
         height: 180px;
         border-width: 12px;
     }
-    
+
     .profile-img-pop {
         height: 240px;
         top: -25px;
     }
-    
+
     .staff-box {
         right: 25px;
         top: 235px;
     }
-    
+
     .staff-box h5 {
         font-size: 16px;
     }
-    
+
     .staff-box p {
         font-size: 14px;
     }
-    
+
     .balloon-right {
         width: 130px;
     }
