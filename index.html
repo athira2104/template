@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Birthday Card Generator</title>
+    <script src="./public/dist/html2canvas.min.js"></script>
+    <script src="./public/dist/jspdf.umd.min.js"></script>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- CONTROL PANEL -->
+      <section class="controls">
+        <h1>🎂 Birthday Card Generator</h1>
+
+        <div class="input-group">
+          <label for="name">Birthday Person's Name:</label>
+          <input type="text" id="name" placeholder="Enter name..." value="" />
+        </div>
+
+        <div class="input-group">
+          <label for="dept">Birthday Person's Department:</label>
+          <input type="text" id="dept" placeholder="Enter Department..." value="" />
+        </div>
+
+        <div class="input-group">
+          <label for="photo">Upload Photo:</label>
+          <input type="file" id="photo" accept="image/*" />
+        </div>
+
+        <button onclick="downloadPDF()">Download as PDF</button>
+      </section>
+
+      <!-- PREVIEW PANEL -->
+      <section class="preview">
+        <article id="card">
+          <div class="photo-container" id="photoContainer">
+            <div class="photo-placeholder">Photo will appear here</div>
+          </div>
+
+          <div class="staff-box">
+            <img class="logo" src="./public/img/logo_cropped.png" />
+            <div class="staff-name-box">
+              <h2 id="cardName" class="staff-name">Your Name</h2>
+            </div>
+            <p id="cardDept" class="staff-dept">Your Department</p>
+          </div>
+        </article>
+      </section>
+    </div>
+
+    <script>
+      const nameInput = document.getElementById("name");
+      const deptInput = document.getElementById("dept");
+      const photoInput = document.getElementById("photo");
+
+      const cardName = document.getElementById("cardName");
+      const cardDept = document.getElementById("cardDept");
+      const photoContainer = document.getElementById("photoContainer");
+
+      nameInput.addEventListener("input", (e) => {
+        cardName.textContent = e.target.value || "Your Name";
+      });
+
+      deptInput.addEventListener("input", (e) => {
+        cardDept.textContent = e.target.value || "Your Department";
+      });
+
+      photoInput.addEventListener("change", (e) => {
+        const file = e.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = (event) => {
+            photoContainer.innerHTML = `<img src="${event.target.result}" alt="Birthday photo">`;
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+
+      async function downloadPDF() {
+        const card = document.getElementById("card");
+        const { jsPDF } = window.jspdf;
+
+        try {
+          const canvas = await html2canvas(card, {
+            scale: 2,
+            backgroundColor: null,
+            logging: false,
+          });
+
+          const imgData = canvas.toDataURL("image/png");
+          const pdf = new jsPDF({
+            orientation: "portrait",
+            unit: "mm",
+            format: "a4",
+          });
+
+          const pdfWidth = pdf.internal.pageSize.getWidth();
+          const pdfHeight = pdf.internal.pageSize.getHeight();
+          const imgWidth = canvas.width;
+          const imgHeight = canvas.height;
+          const ratio = Math.min(pdfWidth / imgWidth, pdfHeight / imgHeight);
+          const imgX = (pdfWidth - imgWidth * ratio) / 2;
+          const imgY = (pdfHeight - imgHeight * ratio) / 2;
+
+          pdf.addImage(imgData, "PNG", imgX, imgY, imgWidth * ratio, imgHeight * ratio);
+          pdf.save(`birthday-card-${nameInput.value || "card"}.pdf`);
+        } catch (error) {
+          console.error("Error generating PDF:", error);
+          alert("Error generating PDF. Please try again.");
+        }
+      }
+    </script>
+  </body>
+</html>
