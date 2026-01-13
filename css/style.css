@@ -75,8 +75,6 @@ input[type="file"] {
 button {
   width: 100%;
   padding: 15px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
   border: none;
   border-radius: 8px;
   font-size: 18px;
@@ -84,6 +82,11 @@ button {
   cursor: pointer;
   transition: transform 0.2s;
   margin-top: 10px;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
 }
 
 button:hover {

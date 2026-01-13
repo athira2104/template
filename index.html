@@ -29,7 +29,16 @@
           <input type="file" id="photo" accept="image/*" />
         </div>
 
-        <button onclick="downloadPDF()">Download as PDF</button>
+        <article style="display: flex; flex-direction: row; gap: 1em">
+          <button onclick="downloadPDF()" style="display: flex; gap: 0.5em" class="btn-primary">
+            <img src="./public/svg/download.svg" alt="" style="width: 2em;">
+            <span>Download as PDF <i style="font-size: 0.7em">(Email)</i></span>
+          </button>
+          <button onclick="downloadImage()" style="display: flex; gap: 0.5em" class="btn-primary">
+            <img src="./public/svg/download.svg" alt="" style="width: 2em;">
+            <span>Download as JPG <i style="font-size: 0.7em">(WhatsApp)</i></span>
+          </button>
+        </article>
       </section>
 
       <!-- PREVIEW PANEL -->
@@ -51,6 +60,8 @@
     </div>
 
     <script>
+      // █░░ █ █░█ █▀▀   █░█ █▀█ █▀▄ ▄▀█ ▀█▀ █▀▀ █▀
+      // █▄▄ █ ▀▄▀ ██▄   █▄█ █▀▀ █▄▀ █▀█ ░█░ ██▄ ▄█
       const nameInput = document.getElementById("name");
       const deptInput = document.getElementById("dept");
       const photoInput = document.getElementById("photo");
@@ -78,24 +89,23 @@
         }
       });
 
+      // █▀█ █▀▄ █▀▀   █▀▀ █▀▀ █▄░█ █▀▀ █▀█ ▄▀█ ▀█▀ █▀█ █▀█
+      // █▀▀ █▄▀ █▀░   █▄█ ██▄ █░▀█ ██▄ █▀▄ █▀█ ░█░ █▄█ █▀▄
       async function downloadPDF() {
         const card = document.getElementById("card");
         const { jsPDF } = window.jspdf;
-
         try {
           const canvas = await html2canvas(card, {
             scale: 2,
             backgroundColor: null,
             logging: false,
           });
-
           const imgData = canvas.toDataURL("image/png");
           const pdf = new jsPDF({
             orientation: "portrait",
             unit: "mm",
             format: "a4",
           });
-
           const pdfWidth = pdf.internal.pageSize.getWidth();
           const pdfHeight = pdf.internal.pageSize.getHeight();
           const imgWidth = canvas.width;
@@ -103,12 +113,33 @@
           const ratio = Math.min(pdfWidth / imgWidth, pdfHeight / imgHeight);
           const imgX = (pdfWidth - imgWidth * ratio) / 2;
           const imgY = (pdfHeight - imgHeight * ratio) / 2;
-
           pdf.addImage(imgData, "PNG", imgX, imgY, imgWidth * ratio, imgHeight * ratio);
           pdf.save(`birthday-card-${nameInput.value || "card"}.pdf`);
         } catch (error) {
           console.error("Error generating PDF:", error);
           alert("Error generating PDF. Please try again.");
+        }
+      }
+
+      // █ █▀▄▀█ ▄▀█ █▀▀ █▀▀   █▀▀ █▀▀ █▄░█ █▀▀ █▀█ ▄▀█ ▀█▀ █▀█ █▀█
+      // █ █░▀░█ █▀█ █▄█ ██▄   █▄█ ██▄ █░▀█ ██▄ █▀▄ █▀█ ░█░ █▄█ █▀▄
+      async function downloadImage() {
+        const card = document.getElementById("card");
+        const fileName = `birthday-card-${nameInput.value || "card"}.png`;
+        try {
+          const canvas = await html2canvas(card, {
+            scale: 3, // High quality for mobile screens
+            useCORS: true, // Helps with loading the uploaded photo correctly
+            backgroundColor: null,
+          });
+          // Create a temporary link element to trigger download
+          const link = document.createElement("a");
+          link.download = fileName;
+          link.href = canvas.toDataURL("image/png");
+          link.click();
+        } catch (error) {
+          console.error("Error generating image:", error);
+          alert("Error generating image. Please try again.");
         }
       }
     </script>
