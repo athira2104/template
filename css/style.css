@@ -141,6 +141,11 @@ button:active {
   overflow: hidden;
   box-shadow: 0 1em 4em rgba(0, 0, 0, 0.2);
   background: white;
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
   display: flex;
   align-items: center;
   justify-content: center;
