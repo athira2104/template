@@ -102,7 +102,7 @@
         const { jsPDF } = window.jspdf;
         try {
           const canvas = await html2canvas(card, {
-            scale: 2,
+            scale: 4,
             backgroundColor: null,
             logging: false,
           });
@@ -134,7 +134,7 @@
         const fileName = `birthday-card-${nameInput.value || "card"}.png`;
         try {
           const canvas = await html2canvas(card, {
-            scale: 3, // High quality for mobile screens
+            scale: 4, // High quality for mobile screens
             useCORS: true, // Helps with loading the uploaded photo correctly
             backgroundColor: null,
           });
