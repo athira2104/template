@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Birthday Card Generator</title>
+  <script src="./public/dist/html2canvas.min.js"></script>
+  <script src="./public/dist/jspdf.umd.min.js"></script>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+  <div class="container">
+    <!-- CONTROL PANEL -->
+    <section class="controls">
+      <h1>🎂 Birthday Card Generator</h1>
+
+      <div class="input-group">
+        <label for="name">Birthday Person's Name:</label>
+        <input type="text" id="name" placeholder="Enter name..." value="" />
+      </div>
+
+      <div class="input-group">
+        <label for="dept">Birthday Person's Department:</label>
+        <input type="text" id="dept" placeholder="Enter Department..." value="" />
+      </div>
+
+      <div class="input-group">
+        <label for="photo">Upload Photo:</label>
+        <input type="file" id="photo" accept="image/*" />
+      </div>
+
+      <article style="display: flex; flex-direction: row; gap: 1em">
+        <button onclick="downloadPDF()" style="display: flex; gap: 0.5em" class="btn-primary">
+          <img src="./public/svg/download.svg" alt="" style="width: 2em;">
+          <span>Download as PDF <i style="font-size: 0.7em">(Email)</i></span>
+        </button>
+        <button onclick="downloadImage()" style="display: flex; gap: 0.5em" class="btn-primary">
+          <img src="./public/svg/download.svg" alt="" style="width: 2em;">
+          <span>Download as JPG <i style="font-size: 0.7em">(WhatsApp)</i></span>
+        </button>
+      </article>
+    </section>
+
+    <!-- PREVIEW PANEL -->
+    <section class="preview" style="flex-direction: column; gap: 20px;">
+
+      <!-- PAGE 1: Personal Card -->
+      <article id="card" class="printable-card">
+        <div class="photo-container" id="photoContainer">
+          <div class="photo-placeholder">Photo will appear here</div>
+        </div>
+
+        <div class="staff-box">
+          <img class="logo" src="./public/img/logo_cropped.png" />
+          <div class="staff-name-box">
+            <h2 id="cardName" class="staff-name">Your Name</h2>
+          </div>
+          <p id="cardDept" class="staff-dept">Your Department</p>
+        </div>
+      </article>
+
+      <!-- PAGE 2: Message -->
+      <article id="card-page2" class="printable-card card-page2">
+        <div class="bg-text-container">
+          <h1 class="bg-text">BIRTHDAY</h1>
+          <h1 class="bg-text">BIRTHDAY</h1>
+          <h1 class="bg-text">BIRTHDAY</h1>
+          <h1 class="bg-text">BIRTHDAY</h1>
+        </div>
+        <div class="message-content">
+          <h3>"Happy Birthday!</h3>
+          <h3>Your hard work is valued.</h3>
+          <h3>Enjoy your special day!"</h3>
+        </div>
+      </article>
+
+      <!-- PAGE 3: Wishes -->
+      <article id="card-page3" class="printable-card card-page3">
+        <div class="wishes-header">
+          <h1 class="wishes-title">BIRTHDAY</h1>
+          <h2 class="wishes-subtitle">Wishes From</h2>
+        </div>
+
+        <div class="signatures-container">
+          <!-- Row 1: 2 Signatures -->
+          <div class="sig-row sig-row-2">
+            <div class="signature-item">
+              <span class="sig-script">signature</span>
+              <span class="sig-name">Dr C P Abdul Rahman</span>
+            </div>
+            <div class="signature-item">
+              <span class="sig-script">signature</span>
+              <span class="sig-name">Y Razia Rahman</span>
+            </div>
+          </div>
+
+          <!-- Row 2: 3 Signatures -->
+          <div class="sig-row sig-row-3">
+            <div class="signature-item">
+              <span class="sig-script">signature</span>
+              <span class="sig-name">Dr C P Abdulla Yasser</span>
+            </div>
+            <div class="signature-item">
+              <span class="sig-script">signature</span>
+              <span class="sig-name">Aadil Salim</span>
+            </div>
+            <div class="signature-item">
+              <span class="sig-script">signature</span>
+              <span class="sig-name">Dr C P Moideen Zafar</span>
+            </div>
+          </div>
+
+          <!-- Row 3: 3 Signatures -->
+          <div class="sig-row sig-row-3">
+            <div class="signature-item">
+              <span class="sig-script">signature</span>
+              <span class="sig-name">Dr Shahida Mammassan</span>
+            </div>
+            <div class="signature-item">
+              <span class="sig-script">signature</span>
+              <span class="sig-name">Mariam Niloufer</span>
+            </div>
+            <div class="signature-item">
+              <span class="sig-script">signature</span>
+              <span class="sig-name">Rehaana Ashraf</span>
+            </div>
+          </div>
+
+          <!-- Row 4: 1 Signature (Family) -->
+          <div class="sig-row sig-row-1">
+            <div class="signature-item">
+              <span class="sig-script">signature</span>
+              <span class="sig-name">Zayn, Jaide, Alisha & Raine</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- PAGE 4: Specialties -->
+      <article id="card-page4" class="printable-card card-page4">
+        <div class="specialties-container">
+          <h2 class="specialties-title">OUR SPECIALTIES</h2>
+          <div class="specialties-list">
+            <div>General Medicine</div>
+            <div>Ophthalmology</div>
+            <div>General Surgery</div>
+            <div>E.N.T Micro Surgery</div>
+            <div>Orthopaedic & Trauma Care</div>
+            <div>Neurology and Neuro Surgery</div>
+            <div>Total Knee & Hip Replacement</div>
+            <div>Plastic & Reconstructive Surgery</div>
+            <div>Arthroscopy & Sports Medicine</div>
+            <div>Maxillofacial Surgery</div>
+            <div>Pediatric & Pediatric Surgery</div>
+            <div>Microvascular Surgery</div>
+            <div>Nephrology</div>
+            <div>Endocrinology</div>
+            <div>Gastroenterology</div>
+            <div>Urology & Andrology</div>
+          </div>
+        </div>
+
+        <div class="footer-info">
+          <img src="./public/img/logo_cropped.png" alt="Highland Hospital" class="footer-logo-main">
+          <p class="footer-address">
+            Mother Theresa Road,<br>
+            Kankanady, Highland Hospitals, Mangaluru,<br>
+            Karnataka 575002. India
+          </p>
+          <p class="footer-address" style="margin-top: 10px;">
+            PH: 0824-4235555<br>
+            Email: reachus@highlandhospital.in
+          </p>
+        </div>
+
+        <div class="footer-logos">
+          <img src="./public/img/logo_cropped.png" alt="Highland">
+          <img src="./public/img/logo_cropped.png" alt="Highland">
+          <div style="font-weight:bold; font-size: 20px;">ZAYNS</div>
+          <div style="font-size: 12px; text-align: center;">AVZ CYBER<br>SECURITY SOLUTIONS L.L.C</div>
+        </div>
+      </article>
+
+    </section>
+
+  </div>
+
+  <script>
+
+    const nameInput = document.getElementById("name");
+    const deptInput = document.getElementById("dept");
+    const photoInput = document.getElementById("photo");
+
+    const cardName = document.getElementById("cardName");
+    const cardDept = document.getElementById("cardDept");
+    const photoContainer = document.getElementById("photoContainer");
+
+    nameInput.addEventListener("input", (e) => {
+      cardName.textContent = e.target.value || "Your Name";
+    });
+
+    deptInput.addEventListener("input", (e) => {
+      cardDept.textContent = e.target.value || "Your Department";
+    });
+
+    photoInput.addEventListener("change", (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          photoContainer.innerHTML = `<img src="${event.target.result}" alt="Birthday photo">`;
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+
+    async function downloadPDF() {
+      const { jsPDF } = window.jspdf;
+      const pdf = new jsPDF({
+        orientation: "portrait",
+        unit: "mm",
+        format: "a4",
+      });
+
+      const cardIds = ["card", "card-page2", "card-page3", "card-page4"];
+
+      for (let i = 0; i < cardIds.length; i++) {
+        const cardElement = document.getElementById(cardIds[i]);
+
+        try {
+          const canvas = await html2canvas(cardElement, {
+            scale: 2,
+            backgroundColor: null,
+            logging: false,
+            useCORS: true
+          });
+
+          const imgData = canvas.toDataURL("image/png");
+          const pdfWidth = pdf.internal.pageSize.getWidth();
+          const pdfHeight = pdf.internal.pageSize.getHeight();
+          const imgWidth = canvas.width;
+          const imgHeight = canvas.height;
+          const ratio = Math.min(pdfWidth / imgWidth, pdfHeight / imgHeight);
+          const imgX = (pdfWidth - imgWidth * ratio) / 2;
+          const imgY = (pdfHeight - imgHeight * ratio) / 2;
+
+          if (i > 0) {
+            pdf.addPage();
+          }
+          pdf.addImage(imgData, "PNG", imgX, imgY, imgWidth * ratio, imgHeight * ratio);
+
+        } catch (error) {
+          console.error(`Error generating Page ${i + 1}:`, error);
+        }
+      }
+
+      pdf.save(`birthday-card-${nameInput.value || "complete"}.pdf`);
+    }
+  </script>
+</body>
+
+</html>
