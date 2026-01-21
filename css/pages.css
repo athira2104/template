@@ -1,0 +1,246 @@
+/* Page 2: Birthday Message */
+.card-page2 {
+    background-color: #1a7f9b;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* Centered vertically like the design */
+    align-items: center;
+    overflow: hidden;
+    /* Ensure it has the background text effect */
+}
+
+.bg-text-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* Spread out */
+    align-items: center;
+    z-index: 0;
+    padding: 20px 0;
+    opacity: 0.1;
+    /* High transparency */
+    pointer-events: none;
+}
+
+.bg-text {
+    font-family: "Times New Roman", Times, serif;
+    /* Sefif font for background */
+    font-size: 130px;
+    font-weight: bold;
+    color: #fff;
+    line-height: 0.8;
+    text-transform: uppercase;
+    margin: 0;
+    white-space: nowrap;
+    letter-spacing: -5px;
+    transform: scaleY(1.5);
+    /* Tall letters */
+}
+
+.message-content {
+    z-index: 2;
+    text-align: center;
+    color: white;
+    width: 90%;
+    margin-top: 200px;
+    /* Push down to lower half */
+}
+
+.message-content h3 {
+    font-family: "Arial", sans-serif;
+    /* Clean sans-serif */
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.message-content p {
+    font-family: "Arial", sans-serif;
+    font-size: 32px;
+    font-weight: bold;
+    margin-top: 0;
+}
+
+/* Page 3: Wishes From */
+.card-page3 {
+    background-color: white;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.wishes-header {
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.wishes-title {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 90px;
+    color: #124e6a;
+    /* Dark Blue */
+    font-weight: bold;
+    text-transform: uppercase;
+    line-height: 0.9;
+    margin: 0;
+    letter-spacing: -2px;
+}
+
+.wishes-subtitle {
+    font-family: "Brush Script MT", "Comic Sans MS", cursive;
+    font-size: 60px;
+    color: #158dbd;
+    /* Lighter Blue */
+    margin-top: -10px;
+    font-weight: normal;
+}
+
+.signatures-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    gap: 30px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.signatures-grid.three-col {
+    grid-template-columns: repeat(3, 1fr);
+    width: 95%;
+}
+
+.signature-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sig-script {
+    font-family: "Brush Script MT", cursive;
+    color: #b0b0b0;
+    font-size: 28px;
+    margin-bottom: 0px;
+    transform: rotate(-5deg);
+}
+
+.sig-name {
+    color: #158dbd;
+    /* Blue Name */
+    font-weight: bold;
+    font-size: 16px;
+    font-family: "Arial", sans-serif;
+    white-space: nowrap;
+}
+
+/* Page 4: Specialties */
+.card-page4 {
+    background-color: #e3f2f7;
+    /* Very light blue bg */
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.specialties-container {
+    background-color: #157ca0;
+    /* Card Blue */
+    border-radius: 20px;
+    padding: 30px 40px;
+    color: white;
+    width: 100%;
+    margin-bottom: 20px;
+    margin-top: 40px;
+    flex-grow: 1;
+}
+
+.specialties-title {
+    text-align: center;
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+    font-family: "Arial", sans-serif;
+    letter-spacing: 1px;
+}
+
+.specialties-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    row-gap: 8px;
+    column-gap: 20px;
+    font-size: 16px;
+    line-height: 1.3;
+    font-family: "Arial", sans-serif;
+}
+
+.specialties-list div {
+    font-weight: 500;
+}
+
+/* Separator line in list if needed, but design is clean list */
+
+.footer-info {
+    text-align: center;
+    color: #333;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.footer-logo-main {
+    width: 180px;
+    margin: 0 auto 10px;
+    display: block;
+}
+
+.footer-address {
+    font-size: 13px;
+    line-height: 1.4;
+    color: #333;
+    font-family: "Arial", sans-serif;
+}
+
+.footer-logos {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    border-top: 1px solid #ddd;
+    /* Tiny separator */
+    padding-top: 10px;
+}
+
+.footer-logos img {
+    height: 35px;
+    object-fit: contain;
+}
+
+.logo-text-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Ensure helper class is correct */
+.printable-card {
+    width: 500px;
+    height: 707px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    margin-bottom: 20px;
+    flex-shrink: 0;
+    /* Don't shrink in flex container */
+    background: white;
+    /* Default bg */
+}

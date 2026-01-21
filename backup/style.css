@@ -1,0 +1,308 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+img {
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+body {
+    margin: 0;
+    padding: 20px;
+    background-color: #e0e0e0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.birthday-container {
+    width: 800px;
+    height: 600px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+    background: #1c738c; /* Dark teal */
+}
+
+/* Upper Section - Light Blue Gradient Background */
+.upper-section {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 45%; /* Slightly shorter top section */
+    background: linear-gradient(to bottom, #e0f5fa 0%, #d5f0f7 50%, #caecf4 100%);
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 25px; /* Lifted text up slightly */
+}
+
+/* Confetti Container - Static Particles */
+.confetti-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.confetti-piece {
+    position: absolute;
+    background: #ff6b6b;
+    opacity: 0.85;
+    border-radius: 1px;
+}
+
+.confetti-piece:nth-child(1) { left: 5%; top: 10%; background: #ff6b6b; width: 5px; height: 10px; transform: rotate(15deg); }
+.confetti-piece:nth-child(2) { left: 12%; top: 22%; background: #4ecdc4; width: 6px; height: 6px; transform: rotate(0deg); border-radius: 50%; }
+.confetti-piece:nth-child(3) { left: 18%; top: 8%; background: #ffe66d; width: 8px; height: 8px; transform: rotate(45deg); }
+.confetti-piece:nth-child(4) { left: 25%; top: 28%; background: #ff9ff3; width: 4px; height: 11px; transform: rotate(-20deg); }
+.confetti-piece:nth-child(5) { left: 32%; top: 15%; background: #ff6b6b; width: 5px; height: 5px; transform: rotate(0deg); border-radius: 50%; }
+.confetti-piece:nth-child(6) { left: 38%; top: 32%; background: #4ecdc4; width: 6px; height: 9px; transform: rotate(30deg); }
+.confetti-piece:nth-child(7) { left: 45%; top: 12%; background: #ffe66d; width: 7px; height: 7px; transform: rotate(45deg); }
+.confetti-piece:nth-child(8) { left: 52%; top: 30%; background: #ff9ff3; width: 4px; height: 12px; transform: rotate(-15deg); }
+.confetti-piece:nth-child(9) { left: 58%; top: 18%; background: #ff6b6b; width: 6px; height: 6px; transform: rotate(0deg); border-radius: 50%; }
+.confetti-piece:nth-child(10) { left: 65%; top: 26%; background: #4ecdc4; width: 8px; height: 8px; transform: rotate(0deg); }
+.confetti-piece:nth-child(11) { left: 72%; top: 14%; background: #ffe66d; width: 5px; height: 10px; transform: rotate(25deg); }
+.confetti-piece:nth-child(12) { left: 78%; top: 34%; background: #ff9ff3; width: 7px; height: 7px; transform: rotate(45deg); }
+.confetti-piece:nth-child(13) { left: 85%; top: 20%; background: #ff6b6b; width: 4px; height: 11px; transform: rotate(-30deg); }
+.confetti-piece:nth-child(14) { left: 92%; top: 38%; background: #4ecdc4; width: 6px; height: 6px; transform: rotate(0deg); border-radius: 50%; }
+.confetti-piece:nth-child(15) { left: 8%; top: 36%; background: #ffe66d; width: 5px; height: 9px; transform: rotate(20deg); }
+.confetti-piece:nth-child(16) { left: 22%; top: 16%; background: #ff9ff3; width: 7px; height: 7px; transform: rotate(45deg); }
+.confetti-piece:nth-child(17) { left: 35%; top: 40%; background: #ff6b6b; width: 5px; height: 5px; transform: rotate(0deg); border-radius: 50%; }
+.confetti-piece:nth-child(18) { left: 48%; top: 24%; background: #4ecdc4; width: 6px; height: 10px; transform: rotate(-25deg); }
+.confetti-piece:nth-child(19) { left: 62%; top: 42%; background: #ffe66d; width: 8px; height: 8px; transform: rotate(45deg); }
+.confetti-piece:nth-child(20) { left: 75%; top: 22%; background: #ff9ff3; width: 4px; height: 12px; transform: rotate(15deg); }
+.confetti-piece:nth-child(21) { left: 88%; top: 16%; background: #ff6b6b; width: 6px; height: 6px; transform: rotate(0deg); border-radius: 50%; }
+.confetti-piece:nth-child(22) { left: 15%; top: 40%; background: #4ecdc4; width: 7px; height: 7px; transform: rotate(45deg); }
+.confetti-piece:nth-child(23) { left: 28%; top: 20%; background: #ffe66d; width: 5px; height: 8px; transform: rotate(-20deg); }
+.confetti-piece:nth-child(24) { left: 42%; top: 12%; background: #ff9ff3; width: 6px; height: 6px; transform: rotate(0deg); border-radius: 50%; }
+.confetti-piece:nth-child(25) { left: 55%; top: 38%; background: #ff6b6b; width: 8px; height: 8px; transform: rotate(45deg); }
+.confetti-piece:nth-child(26) { left: 68%; top: 28%; background: #4ecdc4; width: 5px; height: 11px; transform: rotate(30deg); }
+.confetti-piece:nth-child(27) { left: 82%; top: 18%; background: #ffe66d; width: 6px; height: 6px; transform: rotate(0deg); border-radius: 50%; }
+.confetti-piece:nth-child(28) { left: 95%; top: 32%; background: #ff9ff3; width: 7px; height: 7px; transform: rotate(45deg); }
+.confetti-piece:nth-child(29) { left: 10%; top: 30%; background: #ff6b6b; width: 5px; height: 9px; transform: rotate(-15deg); }
+.confetti-piece:nth-child(30) { left: 50%; top: 42%; background: #4ecdc4; width: 6px; height: 6px; transform: rotate(0deg); border-radius: 50%; }
+.confetti-piece:nth-child(31) { left: 70%; top: 10%; background: #ffe66d; width: 8px; height: 8px; transform: rotate(45deg); }
+.confetti-piece:nth-child(32) { left: 40%; top: 26%; background: #ff9ff3; width: 4px; height: 10px; transform: rotate(25deg); }
+.confetti-piece:nth-child(33) { left: 60%; top: 38%; background: #ff6b6b; width: 7px; height: 7px; transform: rotate(45deg); }
+.confetti-piece:nth-child(34) { left: 30%; top: 44%; background: #4ecdc4; width: 5px; height: 5px; transform: rotate(0deg); border-radius: 50%; }
+.confetti-piece:nth-child(35) { left: 80%; top: 26%; background: #ffe66d; width: 6px; height: 9px; transform: rotate(-20deg); }
+
+/* Lower Section - Solid Teal */
+.lower-section {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background: #1c738c;
+    z-index: 1;
+}
+
+/* Title Styling */
+.happy-text {
+    font-family: 'Brush Script MT', 'Brush Script', 'Lucida Handwriting', cursive;
+    font-size: 52px; /* Slightly larger */
+    font-style: italic;
+    font-weight: normal;
+    color: #1d4b5c; /* Darker blue to match */
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+    z-index: 3;
+    position: relative;
+    transform: rotate(-5deg) translateX(-20px); /* Less shift, more centered */
+    margin-bottom: -5px;
+}
+
+.birthday-text {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-size: 68px; /* Bigger birthday text */
+    font-weight: bold;
+    color: #1d4b5c;
+    letter-spacing: 12px; /* More spacing for 'premium' look */
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+    z-index: 3;
+    position: relative;
+}
+
+/* Profile Container - Left Column */
+.profile-container {
+    position: absolute;
+    top: 58%;
+    left: 28%; /* Shifted back slightly for gap */
+    transform: translate(-50%, -50%);
+    width: 280px;
+    height: 280px;
+    z-index: 10;
+}
+
+.circle-border {
+    width: 280px;
+    height: 280px;
+    border: 24px solid #27bfc1;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    background: #ffffff;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.image-wrapper {
+    position: absolute;
+    top: -95px; /* Head pop-out */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 280px;
+    height: 375px; /* Taller for the torso */
+    z-index: 2;
+    overflow: visible;
+}
+
+.profile-img-pop {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    /* Pop-out mask: Circle starts at y=95px (top of container) */
+    -webkit-mask-image:
+        radial-gradient(circle at 50% 235px, black 140px, transparent 141px),
+        linear-gradient(to bottom, black 235px, transparent 235px);
+    mask-image:
+        radial-gradient(circle at 50% 235px, black 140px, transparent 141px),
+        linear-gradient(to bottom, black 235px, transparent 235px);
+    -webkit-mask-composite: source-over;
+    mask-composite: add;
+}
+
+/* Staff Info Box - Right Column */
+.staff-box {
+    position: absolute;
+    right: 8%;
+    top: 52%;
+    transform: translateY(-50%);
+    z-index: 15;
+    text-align: left;
+    width: 320px;
+}
+
+.staff-name-box {
+    background: #e0f5fa; /* Light Blue Div */
+    border: 3px solid #27bfc1;
+    border-radius: 12px;
+    padding: 15px 25px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    transform: translateY(-100px); /* Lift the name box into the light blue area */
+}
+
+.staff-box h5 {
+    color: #1d4b5c; /* Dark blue text for name */
+    font-family: 'Verdana', sans-serif;
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.staff-box p {
+    color: #ffffff; /* White text for department on the dark teal background */
+    font-family: 'Georgia', serif;
+    font-size: 24px;
+    margin: -70px 0 0 5px; /* Adjust position to stay in the teal section */
+    font-weight: bold;
+}
+
+/* Decorations */
+.balloon-left {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    width: 170px;
+    height: auto;
+    z-index: 6;
+    transform: scaleX(-1); /* Flip for the left side */
+}
+
+.balloon-right {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    width: 170px;
+    height: auto;
+    z-index: 6;
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+    .birthday-container {
+        width: 100%;
+        max-width: 800px;
+        height: 600px;
+    }
+}
+
+@media (max-width: 768px) {
+    .birthday-container {
+        height: 500px;
+    }
+
+    .happy-text {
+        font-size: 36px;
+    }
+
+    .birthday-text {
+        font-size: 42px;
+        letter-spacing: 4px;
+    }
+
+    .profile-container {
+        width: 180px;
+        height: 180px;
+    }
+
+    .circle-border {
+        width: 180px;
+        height: 180px;
+        border-width: 12px;
+    }
+
+    .profile-img-pop {
+        height: 240px;
+        top: -25px;
+    }
+
+    .staff-box {
+        right: 25px;
+        top: 235px;
+    }
+
+    .staff-box h5 {
+        font-size: 16px;
+    }
+
+    .staff-box p {
+        font-size: 14px;
+    }
+
+    .balloon-right {
+        width: 130px;
+    }
+}
