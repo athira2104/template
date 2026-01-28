@@ -196,6 +196,26 @@
 
         pdf.save(`birthday-card-${nameInput.value || "complete"}.pdf`);
       }
+
+      async function downloadImage() {
+        const card = document.getElementById("card");
+        const fileName = `birthday-card-${nameInput.value || "card"}.png`;
+        try {
+          const canvas = await html2canvas(card, {
+            scale: 4, // High quality for mobile screens
+            useCORS: true, // Helps with loading the uploaded photo correctly
+            backgroundColor: null,
+          });
+          // Create a temporary link element to trigger download
+          const link = document.createElement("a");
+          link.download = fileName;
+          link.href = canvas.toDataURL("image/png");
+          link.click();
+        } catch (error) {
+          console.error("Error generating image:", error);
+          alert("Error generating image. Please try again.");
+        }
+      }
     </script>
   </body>
 </html>
