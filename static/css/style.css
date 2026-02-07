@@ -1,0 +1,437 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Arial", sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  max-width: 1200px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  align-items: start;
+}
+
+/* Controls */
+.controls {
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+  color: #667eea;
+  margin-bottom: 25px;
+  font-size: 28px;
+}
+
+.input-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  color: #333;
+  font-weight: 600;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border-color 0.3s;
+}
+
+input[type="text"]:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+input[type="file"] {
+  width: 100%;
+  padding: 10px;
+  border: 2px dashed #e0e0e0;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+button {
+  width: 100%;
+  padding: 15px;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s;
+  margin-top: 10px;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+button:hover {
+  transform: translateY(-2px);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+/* Preview Area */
+.preview {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Base Card Style */
+.printable-card {
+  width: 500px;
+  height: 707px;
+  /* A4 aspect ratio scaled */
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  margin-bottom: 20px;
+  flex-shrink: 0;
+  background: white;
+  position: relative;
+}
+
+/* P A G E   1   -   O R I G I N A L   L A Y O U T   (Reverted) */
+#card {
+  background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+  background-image: url(/static/img/bday_frame2.png);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card-header {
+  text-align: center;
+  z-index: 1;
+}
+
+.photo-container {
+  position: absolute;
+  top: 40.2%;
+  left: 12.5%;
+
+  width: 13em;
+  height: 13em;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 1em 4em rgba(0, 0, 0, 0.2);
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  border: none;
+  /* Removed the teal border */
+  transform: none;
+  /* Removed centering translate */
+}
+
+.photo-container img {
+  width: auto;
+  height: 100%;
+  object-fit: cover;
+}
+
+.photo-placeholder {
+  font-size: 18px;
+  color: #ccc;
+  text-align: center;
+}
+
+.staff-box {
+  position: absolute;
+  right: 5%;
+  top: 40%;
+  z-index: 15;
+  text-align: left;
+  width: 10em;
+  left: auto;
+  /* Reset */
+  bottom: auto;
+  /* Reset */
+  transform: none;
+  /* Reset */
+}
+
+.staff-name-box {
+  background: #dbe9f2;
+  /* Light Blue Div */
+  border: 0.25em solid #127190;
+  border-radius: 0.5em;
+  padding: 0.5em;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  display: block;
+  /* Reset from flex */
+}
+
+.logo {
+  width: 9em;
+  height: 3.5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1em;
+  position: static;
+  /* Reset from absolute */
+}
+
+.staff-name {
+  color: #1d4b5c;
+  /* Dark blue text for name */
+  font-family: "Georgia", serif;
+  font-weight: bold;
+  font-size: 1em;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-align: center;
+  margin: 0;
+  border-bottom: none;
+  /* Reset */
+  display: block;
+  width: auto;
+}
+
+.staff-name::after {
+  display: none;
+  /* Reset */
+}
+
+.staff-dept {
+  color: #ffffff;
+  font-family: "Georgia", serif;
+  font-size: 1em;
+  font-weight: bold;
+  text-align: center;
+  text-transform: none;
+  /* Reset capitalize */
+}
+
+.staff-date {
+  color: #ffffff;
+  font-family: "Georgia", serif;
+  font-size: 0.9em;
+  font-weight: normal;
+  text-align: center;
+  margin-top: 0.5em;
+}
+
+@media (max-width: 1024px) {
+  .container {
+    grid-template-columns: 1fr;
+  }
+
+  #card,
+  .printable-card {
+    width: 100%;
+    max-width: 500px;
+  }
+}
+
+/* Page 2: Birthday Message */
+.card-page2 {
+  background-color: #147a9c;
+  background-image: url(/static/img/2.png);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.bg-text {
+  font-family: "Times New Roman", serif;
+  font-size: 130px;
+  font-weight: bold;
+  color: #fff;
+  line-height: 0.8;
+  text-transform: uppercase;
+  margin: 0;
+  white-space: nowrap;
+  letter-spacing: -4px;
+  transform: scaleY(1.4);
+}
+
+/* Page 3: Wishes From - REFINED */
+.card-page3 {
+  /* Light cream background */
+  /* background-color: #f5f5f0; */
+  background-color: #FFFFFF;
+  background-image: url(/static/img/3.png);
+  background-size: contain;
+  background-position: top;
+  background-repeat: no-repeat;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding-top: 50px;
+}
+
+/* Wishes Header */
+.wishes-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.wishes-title {
+  margin: 0;
+  line-height: 1.2;
+}
+
+.wishes-birthday {
+  display: block;
+  font-family: "Georgia", serif;
+  font-size: 3.5em;
+  font-weight: bold;
+  color: #2d5a6e;
+  /* Navy blue matching the image */
+  letter-spacing: 0.05em;
+  margin-bottom: 0.1em;
+}
+
+.wishes-from {
+  display: block;
+  font-family: "Brush Script MT", cursive;
+  font-size: 2.5em;
+  color: #1a9c8d;
+  /* Teal color */
+  font-weight: normal;
+  font-style: italic;
+}
+
+.signatures-container {
+  width: 100%;
+  height: 70%;
+  margin-top: 1em;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7em;
+  /* Spacing between rows */
+  align-items: center;
+}
+
+.sig-row {
+  width: 100%;
+  display: grid;
+  gap: 1em;
+  /* Horizontal gap between signatures */
+  text-align: center;
+}
+
+.sig-row-2 {
+  grid-template-columns: 1fr 1fr;
+  width: 80%;
+  /* Wider for better spacing */
+  margin: 0 auto;
+  justify-items: center;
+}
+
+.sig-row-3 {
+  grid-template-columns: 1fr 1fr 1fr;
+  width: 95%;
+  margin: 0 auto;
+}
+
+.sig-row-1 {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 0px;
+}
+
+.signature-item {
+  position: relative;
+  height: 6em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.sig-image {
+  position: absolute;
+  bottom: 3em;
+  width: auto;
+  height: 4.5em;
+  object-fit: contain;
+}
+
+.sig-script {
+  font-family: "Brush Script MT", cursive;
+  color: #b0b0b0;
+  /* Light Grey */
+  font-size: 1em;
+  margin-bottom: 0.5em;
+  transform: rotate(-5deg);
+  line-height: 1;
+}
+
+.sig-name {
+  color: #147A9C;
+  font-weight: bold;
+  font-size: 0.9em;
+  font-family: "Georgia", serif;
+  white-space: nowrap;
+  border-bottom: 0.16em solid #147A9C;
+  /* Underline matching text color */
+  display: inline-block;
+}
+
+.sig-title {
+  color: #ffffff;
+  min-width: 9em;
+  background-color: #147A9C;
+  font-weight: 500;
+  font-size: 0.70em;
+  font-family: "Arial", sans-serif;
+  padding: 0.1em 1.2em;
+  border-radius: 0.3em;
+  white-space: nowrap;
+  letter-spacing: 0.3px;
+}
+
+
+/* Page 4: Specialties */
+.card-page4 {
+  background-color: #dfecf2;
+  background-image: url(/static/img/4.png);
+  background-size: contain;
+  background-position: top;
+  background-repeat: no-repeat;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
