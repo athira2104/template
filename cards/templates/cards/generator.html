@@ -1,0 +1,267 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Birthday Card Generator</title>
+    <script src="{% static 'dist/html2canvas.min.js' %}"></script>
+    <script src="{% static 'dist/jspdf.umd.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- CONTROL PANEL -->
+      <section class="controls">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+          <h1>🎂 Birthday Card Generator</h1>
+          <a href="{% url 'logout' %}" style="color: #667eea; text-decoration: none; font-weight: 600;">Logout</a>
+        </div>
+
+        <div style="background: #f0f0f0; padding: 10px; border-radius: 5px; margin-bottom: 20px;">
+          <p style="margin: 0; color: #666;">
+            Logged in as: <strong>{{ request.user.username }}</strong>
+          </p>
+        </div>
+
+        {% if messages %}
+          {% for message in messages %}
+            <div style="background-color: #d4edda;
+                        color: #155724;
+                        padding: 12px;
+                        border-radius: 5px;
+                        margin-bottom: 20px;
+                        border-left: 4px solid #28a745">{{ message }}</div>
+          {% endfor %}
+        {% endif %}
+
+        <div class="input-group">
+          <label for="name">Birthday Person's Name:</label>
+          <input type="text" id="name" name="name" placeholder="Enter name..." required />
+        </div>
+
+        <div class="input-group">
+          <label for="dept">Birthday Person's Department:</label>
+          <input type="text" id="dept" name="department" placeholder="Enter Department..." required />
+        </div>
+
+        <div class="input-group">
+          <label for="date">Birthday Date:</label>
+          <input type="date" id="date" name="birthday_date" required />
+        </div>
+
+        <div class="input-group">
+          <label for="photo">Upload Photo:</label>
+          <input type="file" id="photo" name="photo" accept="image/*" />
+        </div>
+
+        <article style="display: flex; flex-direction: row; gap: 1em; margin-top: 20px;">
+          <button onclick="downloadPDF()" style="display: flex; gap: 0.5em" class="btn-primary">
+            <img src="{% static 'svg/download.svg' %}" alt="" style="width: 2em" />
+            <span>Download as PDF <i style="font-size: 0.7em">(Email)</i></span>
+          </button>
+          <button onclick="downloadImage()" style="display: flex; gap: 0.5em" class="btn-primary">
+            <img src="{% static 'svg/download.svg' %}" alt="" style="width: 2em" />
+            <span>Download as JPG <i style="font-size: 0.7em">(WhatsApp)</i></span>
+          </button>
+        </article>
+      </section>
+
+      <!-- PREVIEW PANEL -->
+      <section class="preview" style="flex-direction: column; gap: 20px">
+        <!-- PAGE 1: Personal Card -->
+        <article id="card" class="printable-card">
+          <div class="photo-container" id="photoContainer">
+            <div class="photo-placeholder">Photo will appear here</div>
+          </div>
+
+          <div class="staff-box">
+            <img class="logo" src="{% static 'img/logo_cropped.png' %}" />
+            <div class="staff-name-box">
+              <h2 id="cardName" class="staff-name">Your Name</h2>
+            </div>
+            <p id="cardDept" class="staff-dept">Your Department</p>
+            <p id="cardDate" class="staff-date"></p>
+          </div>
+        </article>
+
+        <!-- PAGE 2: Message -->
+        <article id="card-page2" class="printable-card card-page2">
+          <!-- Going for the image method instead ;D -->
+        </article>
+
+        <!-- PAGE 3: Wishes -->
+        <article id="card-page3" class="printable-card card-page3">
+          <!-- Signatures Container -->
+          <div class="signatures-container">
+            <!-- Row 1: 2 Signatures -->
+            <div class="sig-row sig-row-2">
+              <div class="signature-item">
+                <img src="{% static 'sign/chairman.png' %}" alt="Signature" class="sig-image">
+                <span class="sig-name">Dr C P Abdul Rahman</span>
+                <span class="sig-title">Chairman</span>
+              </div>
+              <div class="signature-item">
+                <img src="{% static 'sign/president.png' %}" alt="Signature" class="sig-image">
+                <span class="sig-name">Y Razia Rahman</span>
+                <span class="sig-title">President</span>
+              </div>
+            </div>
+
+            <!-- Row 2: 2 Signatures -->
+            <div class="sig-row sig-row-2">
+              <div class="signature-item">
+                <img src="{% static 'sign/md.png' %}" alt="Signature" class="sig-image">
+                <span class="sig-name">Dr C P Abdulla Yasser</span>
+                <span class="sig-title">Medical Director</span>
+              </div>
+              <div class="signature-item">
+                <img src="{% static 'sign/dadmin.png' %}" alt="Signature" class="sig-image">
+                <span class="sig-name">Dr Shahida Mammassan</span>
+                <span class="sig-title">Director Administration</span>
+              </div>
+            </div>
+
+            <!-- Row 3: 2 Signatures -->
+            <div class="sig-row sig-row-2">
+              <div class="signature-item">
+                <img src="{% static 'sign/hr.png' %}" alt="Signature" class="sig-image">
+                <span class="sig-name">Mariam Niloufer</span>
+                <span class="sig-title">Director- HR</span>
+              </div>
+              <div class="signature-item">
+                <img src="{% static 'sign/dfinance.png' %}" alt="Signature" class="sig-image">
+                <span class="sig-name">Dr C P Moideen Zafar</span>
+                <span class="sig-title">Director- Finance</span>
+              </div>
+            </div>
+
+            <!-- Row 4: 1 Signature (CEO) -->
+            <div class="sig-row sig-row-1">
+              <div class="signature-item">
+                <img src="{% static 'sign/ceo.png' %}" alt="Signature" class="sig-image">
+                <span class="sig-name">Mr.Mohammed Yoonu N</span>
+                <span class="sig-title">CEO</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- PAGE 4: Specialties -->
+        <article id="card-page4" class="printable-card card-page4"></article>
+      </section>
+    </div>
+
+    <script>
+      const nameInput = document.getElementById("name");
+      const deptInput = document.getElementById("dept");
+      const dateInput = document.getElementById("date");
+      const photoInput = document.getElementById("photo");
+
+      const cardName = document.getElementById("cardName");
+      const cardDept = document.getElementById("cardDept");
+      const cardDate = document.getElementById("cardDate");
+      const photoContainer = document.getElementById("photoContainer");
+
+      nameInput.addEventListener("input", (e) => {
+        cardName.textContent = e.target.value || "Your Name";
+      });
+
+      deptInput.addEventListener("input", (e) => {
+        cardDept.textContent = e.target.value || "Your Department";
+      });
+
+      dateInput.addEventListener("input", (e) => {
+        if (e.target.value) {
+          const date = new Date(e.target.value);
+          const options = {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+          };
+          cardDate.textContent = date.toLocaleDateString('en-US', options);
+        } else {
+          cardDate.textContent = "";
+        }
+      });
+
+      photoInput.addEventListener("change", (e) => {
+        const file = e.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = (event) => {
+            photoContainer.innerHTML = `<img src="${event.target.result}" alt="Birthday photo">`;
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+
+      async function downloadPDF() {
+        const {
+          jsPDF
+        } = window.jspdf;
+        const pdf = new jsPDF({
+          orientation: "portrait",
+          unit: "mm",
+          format: "a4",
+        });
+
+        const cardIds = ["card", "card-page2", "card-page3", "card-page4"];
+
+        for (let i = 0; i < cardIds.length; i++) {
+          const cardElement = document.getElementById(cardIds[i]);
+
+          try {
+            const canvas = await html2canvas(cardElement, {
+              scale: 3,
+              backgroundColor: null,
+              logging: false,
+              useCORS: true,
+            });
+
+            const imgData = canvas.toDataURL("image/png");
+            const pdfWidth = pdf.internal.pageSize.getWidth();
+            const pdfHeight = pdf.internal.pageSize.getHeight();
+            const imgWidth = canvas.width;
+            const imgHeight = canvas.height;
+            const ratio = Math.min(pdfWidth / imgWidth, pdfHeight / imgHeight);
+            const imgX = (pdfWidth - imgWidth * ratio) / 2;
+            const imgY = (pdfHeight - imgHeight * ratio) / 2;
+
+            if (i > 0) {
+              pdf.addPage();
+            }
+            pdf.addImage(imgData, "PNG", imgX, imgY, imgWidth * ratio, imgHeight * ratio);
+          } catch (error) {
+            console.error(`Error generating Page ${i + 1}:`, error);
+          }
+        }
+
+        pdf.save(`birthday-card-${nameInput.value || "complete"}.pdf`);
+      }
+
+      async function downloadImage() {
+        const cardIds = ["card", "card-page2", "card-page3", "card-page4"];
+        for (let i = 0; i < cardIds.length; i++) {
+          const card = document.getElementById(cardIds[i]);
+          const fileName = `birthday-card-${nameInput.value || "card"}-${i + 1}.png`;
+          try {
+            const canvas = await html2canvas(card, {
+              scale: 4,
+              useCORS: true,
+              backgroundColor: null,
+            });
+            const link = document.createElement("a");
+            link.download = fileName;
+            link.href = canvas.toDataURL("image/png");
+            link.click();
+          } catch (error) {
+            console.error("Error generating image:", error);
+            alert("Error generating image. Please try again.");
+          }
+        }
+      }
+    </script>
+  </body>
+</html>
